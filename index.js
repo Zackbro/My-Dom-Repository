@@ -46,7 +46,7 @@ var dom7 = (function () {
                     }
                     // 选择class
                     else {
-                        els = (context || document).querySeletorAll(selector);
+                        els = (context || document).querySelectorAll(selector);
                     }
                     for (i = 0; i < els.length; i++) {
                         if (els[i]) arr.push(els[i]);
@@ -65,6 +65,25 @@ var dom7 = (function () {
             }
         }
         return new Dom7(arr);
+    }
+
+    Dom7.prototype = {
+    	// this 指代的选取创建的类数组对象 ex: Dom7 {0: p, length: 1}
+    	addClass: function (className) {
+    		console.log(this);
+    		if (typeof className === 'undefined') {
+    			return this;
+    		}
+    		var classes = className.split(' ');
+    		for (var i = 0; i < classes.length; i++) {
+    			for (var j = 0; j < this.length; j++) {
+    				// classList 属性返回元素的类名，作为 DOMTokenList 对象(h5)
+    				if (typeof this[j].classList !== 'undefined') this[j].classList.add(classes[i]);
+    			}
+    		}
+
+    	}
+
     }
     return $;
 
