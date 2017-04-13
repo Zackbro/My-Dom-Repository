@@ -69,6 +69,7 @@ var dom7 = (function () {
 
     Dom7.prototype = {
     	// this 指代的选取创建的类数组对象 ex: Dom7 {0: p, length: 1}
+    	// 添加class
     	addClass: function (className) {
     		console.log(this);
     		if (typeof className === 'undefined') {
@@ -92,6 +93,30 @@ var dom7 = (function () {
     		}
     	},
     	// 获取属性值
+    	attr: function (attrs, value) {
+    		// get attr
+    		if (arguments.length === 1 && typeof attrs === 'string') {
+    			if (this[0]) return this[0].getAttribute(attrs);
+    			else return undefined;
+    		}
+    		else {
+    			// set attr
+    			for (var i = 0; i < this.length; i++) {
+    				// attrs String
+    				if (arguments.length === 2) {
+    					this[i].setAttribute(attrs, value)
+    				} 
+    				else {
+    					// attrs Object
+    					for (var attrName in attrs) {
+    						this[i][attrName] = attrs[attrName];
+    						this[i].setAttribute(attrName, attrs[attrName]);
+    					}
+    				}
+    			}
+    		}
+    		return this;
+    	}
 
     }
     return $;
