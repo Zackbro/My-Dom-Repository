@@ -1,5 +1,5 @@
-var dom7 = (function () {
-    var Dom7 = function (arr) {
+var MDOM = (function () {
+    var MDOM = function (arr) {
         var _this = this, i = 0;
         // 创建类数组对象
         for(i = 0; i < arr.length; i++) {
@@ -12,9 +12,9 @@ var dom7 = (function () {
     var $ = function (selector, context) {
         // arr保存选择器选择的数组对象
         var arr = [], i =0;
-        // 如果已经是dom7的内置对象（的实例），就可以直接返回
+        // 如果已经是MDOM的内置对象（的实例），就可以直接返回
         if (selector && !context) {
-            if (selector instanceof Dom7) {
+            if (selector instanceof MDOM) {
                 return selector;
             }
         }
@@ -57,18 +57,18 @@ var dom7 = (function () {
             else if (selector.nodeType || selector === window || selector === document) {
                 arr.push(selector);
             }
-            // 数组节点 或者 dom7的类数组对象
+            // 数组节点 或者 MDOM的类数组对象
             else if (selector.length > 0 && selector[0].nodeType) {
                 for (i = 0; i < selector.length; i++) {
                     arr.push(selector[i]);
                 }
             }
         }
-        return new Dom7(arr);
+        return new MDOM(arr);
     }
 
-    Dom7.prototype = {
-    	// this 指代的选取创建的类数组对象 ex: Dom7 {0: p, length: 1}
+    MDOM.prototype = {
+    	// this 指代的选取创建的类数组对象 ex: MDOM {0: p, length: 1}
     	// 添加class
     	addClass: function (className) {
     		console.log(this);
@@ -123,5 +123,5 @@ var dom7 = (function () {
 
 })()
 
-window.dom7 = dom7;
+window.MDOM = MDOM;
 
