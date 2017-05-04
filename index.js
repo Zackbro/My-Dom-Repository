@@ -92,7 +92,7 @@ var MDOM = (function () {
     			}
     		}
     	},
-    	// 获取属性值
+    	// 获取属性值, 设置属性值
     	attr: function (attrs, value) {
     		// get attr
     		if (arguments.length === 1 && typeof attrs === 'string') {
@@ -116,6 +116,39 @@ var MDOM = (function () {
     			}
     		}
     		return this;
+    	},
+    	// 移除属性值
+    	removeAttr: function (attr) {
+    		for (var i = 0; i < this.length; i++) {
+    			this[i].removeAttribut(attr);
+    		}
+    		return this;
+    	},
+    	// 给元素绑定数据，相当于h5的data-
+    	data: function (key, value)	{
+    		if (typeof value === 'undefined') {
+    			// get value
+    			if (this[0]) {
+						if (this[0].dataStorage && (key in this[0].dataStorage)) {
+							return this[0].dataStorage[key];
+						} else {
+							// data-
+							var dataKey = this[0].getAttribute('data-' + key);
+							if (dataKey) {
+								return dataKey;
+							}
+							else return undefined;
+						}
+    			}
+    			else return undefined;
+    		} else {
+    			// set value
+    			for (var i = 0; i < this.length; i++) {
+    				var el = this[i];
+    				if (!el.dataStorage) el.dataStorage = {};
+    				el.dataStorage[key] = value;
+    			}
+    		}
     	}
 
     }
