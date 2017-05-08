@@ -43,10 +43,26 @@
     }
     if (distance > height) distance = height;
     console.log(inf);
-    window.addEventListener("scroll", function (e) {
-      console.log(e);
-    });
+    // window.addEventListener("scroll", function (e) {
+    //   console.log(e);
+    // });
     console.log(height);
+    if (onTop) {
+                if (scrollTop < distance) {
+                    inf.trigger('infinite');
+                }
+            }
+            else {
+                if (scrollTop + height >= scrollHeight - distance) {
+                    if (virtualListContainer.length > 0) {
+                        virtualList = virtualListContainer.eq(-1)[0].f7VirtualList;
+                        if (virtualList && !virtualList.reachEnd && !virtualList.params.updatableScroll) {
+                            return;
+                        }
+                    }
+                    inf.trigger('infinite');
+                }
+            }
 
   </script>
 </body>
